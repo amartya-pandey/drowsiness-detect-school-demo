@@ -3,7 +3,10 @@ import math
 import av
 import cv2
 import mediapipe as mp
-import streamlit as st
+try:
+    from mediapipe import solutions as mp_solutions
+except ImportError:
+    from mediapipe.python import solutions as mp_solutionsimport streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
 
 st.set_page_config(page_title="Drowsiness Detector", page_icon="😴", layout="wide")
@@ -72,9 +75,9 @@ def draw_glass_card(img, x, y, w, h, bg_color=(20, 24, 33), alpha=0.75):
 
 class DrowsinessProcessor(VideoProcessorBase):
     def __init__(self):
-        self.mp_face_mesh = mp.solutions.face_mesh
-        self.mp_drawing = mp.solutions.drawing_utils
-        self.mp_drawing_styles = mp.solutions.drawing_styles
+        self.mp_face_mesh = mp_solutions.face_mesh
+        self.mp_drawing = mp_solutions.drawing_utils
+        self.mp_drawing_styles = mp_solutions.drawing_styles
         self.face_mesh = self.mp_face_mesh.FaceMesh(
             max_num_faces=1,
             refine_landmarks=True,
