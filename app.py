@@ -6,7 +6,8 @@ import mediapipe as mp
 try:
     from mediapipe import solutions as mp_solutions
 except ImportError:
-    from mediapipe.python import solutions as mp_solutionsimport streamlit as st
+    from mediapipe.python import solutions as mp_solutions
+import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
 
 st.set_page_config(page_title="Drowsiness Detector", page_icon="😴", layout="wide")
